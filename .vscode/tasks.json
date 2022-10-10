@@ -1,0 +1,13 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "update compile_commands.json",
+            "command": "./update_compile_commands.sh",
+            "isBackground": true,
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        }   
+    ]
+}

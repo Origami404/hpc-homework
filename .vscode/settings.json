@@ -1,0 +1,36 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        ".cache": true,
+        ".xmake": true,
+        "build": true
+    },
+
+    "clangd.onConfigChanged": "restart",
+    "clangd.arguments": [
+        "--clang-tidy",
+        "--compile-commands-dir=build",
+        "--fallback-style=Google",
+        "--enable-config",
+
+        // 关闭自动头文件补全
+        "--header-insertion=never",
+        // 启发式补全模型
+        "--ranking-model=heuristics",
+
+        // 后台分析文件
+        "--background-index",
+        // 内存存储分析过程的临时文件
+        "--pch-storage=memory",
+
+        // 更详细的补全内容
+        "--completion-style=detailed",
+
+        "-j=12"
+    ],
+
+    "files.associations": {
+        ".clangd": "yaml"   
+    },
+    "sonarlint.pathToCompileCommands": "${workspaceFolder}/build/compile_commands.json"
+}

@@ -1,0 +1,14 @@
+Diagnostics:
+  ClangTidy:
+    Add: [
+      performance-*,
+      bugprone-*,
+      portability-*,
+      modernize-*,
+    ]
+    Remove: [
+      # 我的写法里会有很多把指针塞进 sizeof 的用法
+      # bugprone-sizeof-expression,
+    ]
+    CheckOptions:
+      WarnOnFloatingPointNarrowingConversion: false
