@@ -3,11 +3,11 @@ add_rules("mode.debug", "mode.release")
 target("sgemm")
     set_kind("binary")
 
-    set_warnings("all", "error")
+    set_warnings("all")
     set_languages("c17", "cxx17")
 
-   add_defines("NDEBUG", "DEBUG")
-
+    add_defines("NDEBUG", "DEBUG", "_GNU_SOURCE")
+    add_links("rt")
 
     add_includedirs("src")
     add_files("src/*.c")
