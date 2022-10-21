@@ -1,8 +1,7 @@
 #include <math.h>
 #include <time.h>
 #include <unistd.h>
-
-#include "matrix.inl.h"
+#include "matrix_macros.h"
 
 float float_rand(float min, float max) {
     float scale = rand() / (float) RAND_MAX; /* [0, 1.0] */
@@ -41,8 +40,19 @@ inline static i64 time_in_ns() {
 
 static u32 const REPEAT = 10;
 
-// return time in ns
-i64 test_one(u32 n, matrix_mul_op_t op) {
+void matrix_mul_baseline(float *C, float *A, float *B, u32 n) {
+    CLEAR(C, n * n);
+
+    for (u32 i = 0; i < n; i++) {
+        for (u32 j = 0; j < n; j++) {
+            for (u32 k = 0; k < n; k++) {
+                C(i, j) += A(i, k) * B(k, j);
+            }
+        }
+    }
+}
+
+void test_one_with_report(u32 n) {
     float *A = calloc(n * n, sizeof(*A));
     float *B = calloc(n * n, sizeof(*B));
     float *C = calloc(n * n, sizeof(*C));
@@ -55,26 +65,13 @@ i64 test_one(u32 n, matrix_mul_op_t op) {
 
     i64 const begin_ns = time_in_ns();
     for (u32 cnt = 0; cnt < REPEAT; cnt++) {
-        op(C, A, B, n);
+        matrix_mul(C, A, B, n);
     }
     i64 const end_ns = time_in_ns();
 
     if (!matrix_equal(C, D, n)) {
-        return -1;
+        printf("Fail: %20s\n", name);
     } else {
-        return end_ns - begin_ns;
-    }
-}
-
-void test_with_report(u32 n) {
-    u32 const op_cnt = sizeof(matrix_ops) / sizeof(*matrix_ops);
-    for (u32 i = 0; i < op_cnt; i++) {
-        i64 const duration = test_one(n, matrix_ops[i]);
-        
-        if (duration < 0) {
-            printf("Fail: %20s\n", matrix_op_name[i]);
-        } else {
-            printf("Pass: %20s with %ld ns\n", matrix_op_name[i], duration);
-        }
+        printf("Pass: %20s with %ld ns\n", name, end_ns - begin_ns);
     }
 }

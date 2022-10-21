@@ -1,6 +1,8 @@
-#include "methods/matrix_macros.h"
+#include "matrix_macros.h"
 
-void matrix_mul_baseline(float *C, float *A, float *B, u32 n) {
+DECL_NAME("00_baseline");
+
+void matrix_mul(float *C, float *A, float *B, u32 n) {
     CLEAR(C, n * n);
 
     for (u32 i = 0; i < n; i++) {
