@@ -1,6 +1,7 @@
 #include "matrix_macros.h"
 
 DECL_NAME("01_adjust_loop_order");
+NO_HOOK();
 
 void matrix_mul(float *C, float *A, float *B, u32 n) {
     CLEAR(C, n * n);

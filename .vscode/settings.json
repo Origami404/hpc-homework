@@ -6,6 +6,8 @@
         "build": true
     },
 
+    "sonarlint.pathToCompileCommands": "/home/origami/code/homework/hpc/sgemm-next/build/compile_commands.json",
+
     "clangd.onConfigChanged": "restart",
     "clangd.arguments": [
         "--clang-tidy",
@@ -31,6 +33,5 @@
 
     "files.associations": {
         ".clangd": "yaml"   
-    },
-    "sonarlint.pathToCompileCommands": "${workspaceFolder}/build/compile_commands.json"
+    }
 }

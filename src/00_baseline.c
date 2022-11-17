@@ -1,6 +1,7 @@
 #include "matrix_macros.h"
 
 DECL_NAME("00_baseline");
+NO_HOOK();
 
 void matrix_mul(float *C, float *A, float *B, u32 n) {
     CLEAR(C, n * n);

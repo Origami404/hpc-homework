@@ -2,8 +2,9 @@
 #include "matrix_macros.h"
 
 DECL_NAME("02_multi_thread");
+NO_HOOK();
 
-#define THREAD_COUNT 16
+enum { THREAD_COUNT=16 };
 
 struct thread_info {
     float *A;

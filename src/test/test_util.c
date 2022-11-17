@@ -72,6 +72,7 @@ void test_one_with_report(u32 n) {
     if (!matrix_equal(C, D, n)) {
         printf("Fail: %20s\n", name);
     } else {
-        printf("Pass: %20s with %ld ns\n", name, end_ns - begin_ns);
+        // printf("Pass: %20s with %ld ns\n", name, end_ns - begin_ns);
+        printf("%ld", end_ns - begin_ns);
     }
 }
